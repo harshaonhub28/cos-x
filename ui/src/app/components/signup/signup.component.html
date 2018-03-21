@@ -1,0 +1,117 @@
+<div id="loginContainer" fxLayout="column" fxLayoutAlign="center center">
+
+  <div *ngIf="!signupSuccess; else signup_success ">
+    <mat-card id="signup-card">
+
+      <mat-card-header fxLayoutAlign="center center">
+        <mat-card-title class="card-header">Sign up</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <form id="signUpForm" #signupForm="ngForm" (ngSubmit)="formSubmit(signupForm)">
+
+          <mat-form-field class="full-width">
+            <input [(ngModel)]="model.name" #signup_name="ngModel" required name="signup_name" type="email" matInput id="signup_name"
+              placeholder="Enter your full name" class="formInputs">
+          </mat-form-field>
+
+          <div id="signupEmailErrors" *ngIf="signup_name.touched && !signup_name.valid">
+            <span *ngIf="signup_name['errors']['required']" class="alert">
+              Name is required
+            </span>
+            <br/>
+          </div>
+
+          <mat-form-field class="full-width">
+            <input [(ngModel)]="model.email" #signup_email="ngModel" required name="signup_email" type="email" matInput id="signup_email"
+              placeholder="Enter your email address" class="formInputs">
+          </mat-form-field>
+
+          <div id="signupEmailErrors" *ngIf="signup_email.touched && !signup_email.valid">
+            <span *ngIf="signup_email['errors']['required']" class="alert">
+              Email is required
+            </span>
+            <br/>
+          </div>
+
+          <mat-form-field class="full-width">
+            <input [(ngModel)]="model.username" #signup_username="ngModel" required name="signup_username" type="username" matInput id="signup_username"
+              placeholder="Choose a username" class="formInputs">
+          </mat-form-field>
+
+          <div *ngIf="signup_username.touched && !signup_username.valid">
+            <span *ngIf="signup_username['errors']['required']" class="alert">
+              Username is required
+            </span>
+            <br/>
+          </div>
+
+
+          <mat-form-field class="full-width">
+            <input [(ngModel)]="model.password" #signup_password="ngModel" required name="signup_password" type="password" matInput id="signupPassword"
+              placeholder="Choose a password" class="formInputs">
+          </mat-form-field>
+
+          <div *ngIf="signup_password.touched && !signup_password.valid">
+            <span *ngIf="signup_password['errors']['required']" class="alert">
+              Password is required
+            </span>
+            <br/>
+          </div>
+
+          <mat-form-field class="full-width">
+            <input required ngModel #confirm_password="ngModel" name="confirm_password" type="password" matInput id="confirmPassword"
+              placeholder="Confirm Password" class="formInputs">
+          </mat-form-field>
+
+          <div *ngIf="confirm_password.touched && !confirm_password.valid">
+            <span *ngIf="confirm_password['errors']['required']" class="alert">
+              Password is required
+            </span>
+            <br/>
+          </div>
+
+          <div *ngIf="confirm_password.touched && confirm_password.valid">
+            <span *ngIf="!(confirm_password.value===signup_password.value)" class="alert">
+              Passwords do not match
+            </span>
+            <br/>
+          </div>
+
+          <div *ngIf="showSpinner;else signupButton">
+            <mat-spinner id="spinner" [diameter]="30"></mat-spinner>
+          </div>
+
+          <ng-template #signupButton>
+            <button type="submit" [disabled]="!signupForm.valid" mat-raised-button color='primary'>
+              Sign Up
+            </button>
+          </ng-template>
+
+        </form>
+      </mat-card-content>
+    </mat-card>
+    <br>
+    <span class="alert" fxLayoutAlign="center">{{signupError}}</span>
+    <br>
+  </div>
+
+  <ng-template #signup_success>
+    <mat-card fxLayout="column" fxLayoutAlign="center center">
+      <mat-card-header>
+        <mat-card-title class="card-header">
+          Success!
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        You have been succesfully signed up..
+      </mat-card-content>
+      <mat-card-actions>
+        <button id="success_login" mat-button routerLink="/login">Click here to login</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
+
+
+</div>

@@ -1,0 +1,54 @@
+<div id="loginContainer" fxLayout="column" fxLayoutAlign="center center">
+
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title class="card-header">
+        Sign In
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form id="loginForm" #loginForm="ngForm" (ngSubmit)="formSubmit(loginForm)">
+        <mat-form-field class="full-width">
+          <input [(ngModel)]="model.email" #login_email="ngModel" required name="email" type="email" matInput id="login_email" placeholder="Email"
+            class="formInputs">
+
+        </mat-form-field>
+        <div id="loginEmailErrors" *ngIf="login_email.touched && !login_email.valid">
+          <span *ngIf="login_email['errors']['required']" class="alert">
+            Email is required
+          </span>
+        </div>
+
+
+        <mat-form-field class="full-width">
+          <input [(ngModel)]="model.password" #login_password="ngModel" required name="password" type="password" matInput id="login_password"
+            placeholder="Password" class="formInputs">
+        </mat-form-field>
+        <div id="loginPasswordErrors" *ngIf="login_password.touched && !login_password.valid">
+          <span *ngIf="login_password['errors']['required']" class="alert">
+            Password is required
+          </span>
+        </div>
+
+
+
+
+        <div *ngIf="showSpinner;else signinButton">
+          <mat-spinner id="spinner" [diameter]="30"></mat-spinner>
+        </div>
+
+        <ng-template #signinButton>
+          <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color='primary'>Sign In</button>
+        </ng-template>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br/>
+  <span class="alert" fxLayoutAlign="center">{{invalidLogin}}</span>
+  <br>
+
+</div>
+
+
+<mat-spinner *ngIf="showSpinner"></mat-spinner>

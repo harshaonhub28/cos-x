@@ -1,0 +1,71 @@
+<!--*ngIf="auth.isLoggedIn()"-->
+<mat-sidenav-container layout="row" fullscreen>
+  <div class="container" id="header" fxLayout fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+
+    <mat-toolbar role="header" color="primary">
+
+      <div class="text-left" fxFlex="15%">
+        <button mat-icon-button (click)="menu.open()" *ngIf="auth.isLoggedIn()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <div fxFlex="70%">
+        <span id="place" routerLink="/home" class="home-link">{{projectName}}</span>
+      </div>
+
+      <div fxFlex="15%">
+        <div *ngIf="auth.isLoggedIn() else notLoggedIn">
+          <button mat-icon-button [matMenuTriggerFor]="userMenu">
+            <mat-icon>person</mat-icon>
+          </button>
+        </div>
+        <ng-template #notLoggedIn>
+          <div>
+            <a mat-raised-button class="login-chip" routerLink="/login" routerLinkActive="hide">
+              Login
+            </a>
+
+            <a mat-raised-button class="login-chip" routerLink="/signup" routerLinkActive="hide">
+              Signup
+            </a>
+
+          </div>
+        </ng-template>
+      </div>
+
+    </mat-toolbar>
+
+  </div>
+
+  <div>
+    <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item (click)="logoutUser()">
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <router-outlet></router-outlet>
+  <!-- <login></login> -->
+  <!-- Routed views go here -->
+
+
+  <mat-sidenav id="sideNav" color="primary" #menu>
+    <mat-nav-list>
+      <div id="navHeader" routerLink="/home" class="home-link" (click)="menu.close()">
+        <span id="projectName">{{projectName}}</span>
+        <!-- <button mat-icon-button id="closeNavIcon" (click)="menu.close()">
+                <mat-icon >close</mat-icon>
+            </button> -->
+      </div>
+
+      <div *ngIf="auth.getUser().role === 'admin'">
+        <a mat-list-item routerLink="/dashboard" routerLinkActive="active" class="navLinks" (click)="menu.close()"> Dashboard </a>
+      </div>
+
+
+    </mat-nav-list>
+    <hr>
+  </mat-sidenav>
+</mat-sidenav-container>

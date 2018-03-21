@@ -1,18 +1,18 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
+const express = require("express");
+const path = require("path");
+const favicon = require("serve-favicon");
+const logger = require("morgan");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cors = require('cors');
+const cors = require("cors");
 const passport = require("passport");
 
-const routes = require('./routes');
-//const strategy = require('./config/passport').strategy;
+const routes = require("./routes");
+const strategy = require("./config/passport").strategy;
 
 const app = express();
-const dbConfig = require('./config/config').dbConfig;
+const dbConfig = require("./config/config").dbConfig;
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
@@ -27,22 +27,22 @@ app.use(cors());
 passport.use(strategy());
 app.use(passport.initialize());
 
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use((err,req,res,next) => {
+app.use(express.static(path.join(__dirname, "public")));
+app.use((err, req, res, next) => {
   //console.log(err)
   console.log(err.stack);
   next(err);
 });
 
-app.use('/api', routes);
+app.use("/api", routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  const err = new Error('Not Found');
+  const err = new Error("Not Found");
   err.status = 404;
   next(err);
 });
@@ -51,7 +51,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   console.log(err);
@@ -62,10 +62,12 @@ app.use(function(err, req, res, next) {
 
 dbConnection = dbConfig.dbConnection;
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConnection)
+mongoose
+  .connect(dbConnection)
   .then(() => {
     console.log("Connected to MongoDB", dbConnection);
-  }).catch((err) => {
+  })
+  .catch(err => {
     console.log("Error connecting to mongodb", err);
   });
 

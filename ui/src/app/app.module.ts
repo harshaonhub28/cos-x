@@ -4,7 +4,6 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 
-
 import { environment } from "../environments/environment";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -13,7 +12,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 // services
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth-guard.service";
-
 
 // angular material compnents
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -35,25 +33,26 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 
-
 //components
-import { AppComponent } from './app.component';
+import { AppComponent } from "./app.component";
 import { LayoutComponent } from "./components/layout/layout.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
-
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full" },
   { path: "signup", component: SignupComponent, pathMatch: "full" }
-]
+  { path: "dashboard", component: DashboardComponent, pathMatch: "full",canActivate: AuthGuard }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -84,4 +83,4 @@ const appRoutes: Routes = [
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

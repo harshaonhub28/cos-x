@@ -1,0 +1,43 @@
+<div class="reportContainer" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="report-card">
+    <mat-card-header class="report-header">
+      <mat-card-title>
+        <h2>Student name</h2>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Class
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="report-form">
+      <h3>Report:</h3>
+
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+
+        <h4>Exam</h4>
+        <mat-form-field class="scoreInput">
+          <mat-select placeholder="Select">
+            <mat-option value="option" *ngFor="let examType of validExamTypes">{{examType}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-input" *ngFor="let subject of subjects">
+        <div fxLayout="row" fxLayoutAlign="space-around center">
+          <h4>{{subject}}</h4>
+          <div class="scoreInput">
+            <mat-form-field>
+              <input matInput placeholder="Score">
+            </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center">
+      <button class="upload-button" mat-raised-button>Upload</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

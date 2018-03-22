@@ -1,0 +1,30 @@
+.report-card {
+  max-width: 80%;
+  margin: 30px;
+  width: 50%;
+}
+
+.report-form {
+  margin: 30px;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.upload-button {
+  background-color: #3f51b5;
+  color: white;
+}
+
+.card-actions {
+  margin: 20px;
+}

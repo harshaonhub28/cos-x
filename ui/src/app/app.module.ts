@@ -32,6 +32,8 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatDividerModule } from "@angular/material/divider";
+import { MatTableModule } from "@angular/material/table";
 
 //components
 import { AppComponent } from "./app.component";
@@ -39,11 +41,30 @@ import { LayoutComponent } from "./components/layout/layout.component";
 import { LoginComponent } from "./components/login/login.component";
 import { SignupComponent } from "./components/signup/signup.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { ReportUploadComponent } from "./components/report-upload/report-upload.component";
+import { ViewReportComponent } from "./components/view-report/view-report.component";
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full" },
-  { path: "signup", component: SignupComponent, pathMatch: "full" }
-  { path: "dashboard", component: DashboardComponent, pathMatch: "full",canActivate: AuthGuard }
+  { path: "signup", component: SignupComponent, pathMatch: "full" },
+  {
+    path: "dashboard",
+    component: DashboardComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "upload-report",
+    component: ReportUploadComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "view-report",
+    component: ViewReportComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
@@ -52,7 +73,9 @@ const appRoutes: Routes = [
     LayoutComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    ReportUploadComponent,
+    ViewReportComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +101,9 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatRadioModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDividerModule,
+    MatTableModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

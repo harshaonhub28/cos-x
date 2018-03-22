@@ -1,0 +1,59 @@
+<div class="reportContainer" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="report-card">
+    <mat-card-header class="report-header">
+      <mat-card-title>
+        <h2>Student name</h2>
+      </mat-card-title>
+      <mat-card-subtitle>
+        Class
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="report-form">
+      <h3>Report:</h3>
+      <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="reportData">
+
+          <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+
+
+          <ng-container matColumnDef="exam">
+            <mat-header-cell *matHeaderCellDef> Exam </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.exam}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="maths">
+            <mat-header-cell *matHeaderCellDef> Maths </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.maths}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="science">
+            <mat-header-cell *matHeaderCellDef> Science </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.science}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="social">
+            <mat-header-cell *matHeaderCellDef> Social </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.social}} </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+    </mat-card-content>
+    <mat-divider></mat-divider>
+
+    <mat-card-actions class="card-actions" fxLayout="row" fxLayoutAlign="space-around center">
+      <button class="upload-button" mat-raised-button>Update</button>
+      <button class="upload-button" mat-raised-button>Discard & Create New report</button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

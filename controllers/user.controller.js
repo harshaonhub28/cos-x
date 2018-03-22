@@ -6,11 +6,11 @@ const User = require("../models/user.model");
 const logger = require("../config/logger");
 
 const login = (req, res, next) => {
-  const errors = validationResult(req);
+  /*const errors = validationResult(req);
 
-  if (!errors.isEmpty()) {
-    return res.status(400).send(errors.mapped());
-  }
+    if (!errors.isEmpty()) {
+      return res.status(400).send(errors.mapped());
+    }*/
   if (req.body.email && req.body.password) {
     const username = req.body.email;
     const password = req.body.password;
@@ -45,11 +45,10 @@ const login = (req, res, next) => {
 };
 
 const signup = (req, res, next) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    return res.status(400).send(errors.mapped());
-  }
+  /*const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send(errors.mapped());
+    }*/
 
   if (req.body.username && req.body.password && req.body.role) {
     const username = req.body.username;

@@ -1,0 +1,70 @@
+const path = require("path");
+const xlsx = require("xlsx");
+const bodyParser = require("body-parser");
+const fs = require("fs");
+
+const { TeacherModel } = require("../models/teacher.model");
+
+const uploadTeachers = (req, res) => {
+  if (req.body.data) {
+    let teachers = [];
+    const schoolId = req.body.schoolId;
+    //the excel file is converted in to base64 string and being sent
+    const data = req.body.data;
+
+    //Checking for directory existence, if not , creating the directory
+    const fileLocation = path.join(
+      __dirname,
+      `../Teachers/${req.body.fileName}`
+    );
+    const dirname = path.dirname(fileLocation);
+    if (!fs.existsSync(dirname)) {
+      fs.mkdirSync(dirname);
+    }
+
+    //Decoding the base64 string directly using writeFile into a csv file
+    const filePromise = new Promise((resolve, reject) => {
+      fs.writeFile(fileLocation, data, { encoding: "base64" }, err => {
+        if (err) {
+          reject(err);
+        }
+        let fileData = xlsx.readFile(fileLocation);
+        resolve(fileData);
+      });
+    }).then(data => {
+      try {
+        let sheet = data.Sheets.Sheet1;
+        let i = 2;
+        while (sheet) {
+          let teacherName = sheet[`A${i}`].v;
+          let department = sheet[`B${i}`].v;
+          let address = sheet[`C${i}`].v;
+          let email = sheet[`D${i}`].v;
+
+          let newTeacher = {
+            schoolId,
+            teacherName,
+            department,
+            address,
+            email
+          };
+          teachers.push(newTeacher);
+          i++;
+          //end condition for the loop
+          if (!sheet[`B${i}`]) {
+            sheet = "";
+          }
+        }
+        console.log(teachers);
+        TeacherModel.create(teachers, (err, teacherArray) => {
+          if (err) throw err;
+          res.status(201).send("Teachers created");
+        });
+      } catch (err) {
+        if (err) throw err;
+      }
+    });
+  }
+};
+
+module.exports = { uploadTeachers };

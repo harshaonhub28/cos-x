@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const fileController = require("./controllers/file.controller");
 const userController = require("./controllers/user.controller");
+const studentController = require("./controllers/student.controller");
+const teacherController = require("./controllers/teacher.controller");
 const logger = require("./config/logger");
 
 /* everything will go at /api/route */
@@ -19,5 +21,9 @@ router.delete("/delete/report/:studentId", fileController.discardReport);
 router.post("/signup", userController.signup);
 //api to login
 router.post("/login", userController.login);
+//api to upload students data
+router.post("/upload/students", studentController.uploadStudents);
+//api to upload teachers data
+router.post("/upload/teachers", teacherController.uploadTeachers);
 
 module.exports = router;

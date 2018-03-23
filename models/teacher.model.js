@@ -1,23 +1,21 @@
 const mongoose = require("mongoose");
-const uuid = require("uuid/v4");
+const uuid = require("uuid");
 const Schema = mongoose.Schema;
 
 const teacherSchema = new Schema({
   schoolId: {
     type: String,
-    required: true,
-    default: uuidv4()
+    required: true
   },
   //the teacher's userId which will be saved to this table when the teacher signs up
   teacherUserId: {
     type: String,
-    default: uuidv4(),
+    default: uuid.v4,
     unique: true
   },
   teacherName: {
     type: String,
-    required: true,
-    default: ""
+    required: true
   },
   department: {
     type: String,
@@ -29,8 +27,7 @@ const teacherSchema = new Schema({
   },
   email: {
     type: String,
-    required: true,
-    default: ""
+    required: true
   },
   //The class which the teacher is assigned to, and the duration of the assignment
   assignedClass: {
@@ -49,6 +46,6 @@ const teacherSchema = new Schema({
 
 teacherSchema.set("timestamps", true);
 
-const teacherModel = mongoose.model("teacher", teacherSchema);
+const TeacherModel = mongoose.model("teacher", teacherSchema);
 
-module.exports = { teacherModel };
+module.exports = { TeacherModel };

@@ -43,6 +43,8 @@ node_modules
 
 #files created in development
 files
+Students
+Teachers
 
 # Optional npm cache directory
 .npm

@@ -1,17 +1,17 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const classSchema = new Schema({
+const standardSchema = new Schema({
   //school Id from the school schema
   schoolId: {
     type: String,
     required: true,
     unique: true
   },
-  class: {
+  standard: {
     type: [
       {
-        class: String,
+        standard: String,
         subjects: [
           {
             subject: String
@@ -22,8 +22,8 @@ const classSchema = new Schema({
   }
 });
 
-classSchema.set("timestamps", true);
+standardSchema.set("timestamps", true);
 
-const classModel = mongoose.model("class", classSchema);
+const StandardModel = mongoose.model("class", StandardSchema);
 
-module.exports = { classModel };
+module.exports = { StandardModel };

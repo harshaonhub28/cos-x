@@ -6,7 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./view-report.component.css"]
 })
 export class ViewReportComponent implements OnInit {
-  displayedColumns = ["exam", "maths", "science", "social"];
+  displayedColumns = ["exam", "maths", "social", "science"];
   reportData = [
     {
       exam: "internals",
@@ -21,7 +21,7 @@ export class ViewReportComponent implements OnInit {
       social: 86
     },
     {
-      exam: "sem_exams",
+      exam: "sem exams",
       maths: 99,
       science: 95,
       social: 86

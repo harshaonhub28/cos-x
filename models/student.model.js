@@ -1,26 +1,25 @@
 const mongoose = require("mongoose");
-const uuid = require("uuid/v4");
+const uuid = require("uuid");
 const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
   schoolId: {
     type: String,
-    required: true,
-    default: uuidv4()
+    required: true
   },
   //the student's userId which will be saved to this table when the student signs up
   studentUserId: {
     type: String,
-    default: uuidv4(),
+    default: uuid.v4,
     unique: true
   },
   studentName: {
     type: String,
-    required: true,
-    default: ""
+    required: true
   },
-  class: {
+  standard: {
     type: String,
+    required: true,
     default: ""
   },
   address: {
@@ -30,7 +29,7 @@ const studentSchema = new Schema({
   email: {
     type: String,
     required: true,
-    default: ""
+    unique: true
   },
   guardianContact: {
     type: String,
@@ -40,6 +39,6 @@ const studentSchema = new Schema({
 
 studentSchema.set("timestamps", true);
 
-const studentModel = mongoose.model("student", studentSchema);
+const StudentModel = mongoose.model("student", studentSchema);
 
-module.exports = { studentModel };
+module.exports = { StudentModel };

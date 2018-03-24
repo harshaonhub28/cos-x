@@ -1,0 +1,29 @@
+<div class="upload-container">
+  <mat-card class="file-upload">
+    <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+      <mat-card-title class="file-upload-header">
+        <h3>Upload students</h3>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="file-upload-content">
+      <div class="upload-form" fxLayout="column">
+        <div>
+          <button id="custom-file-input" mat-button class="upload-button">
+            Choose file
+          </button>
+          <input id="file-input" name="myFile" type="file" (change)="encodeFile()">
+        </div>
+      </div>
+    </mat-card-content>
+    <div *ngIf="showSpinner;else uploadButton">
+      <mat-spinner id="spinner" [diameter]="30"></mat-spinner>
+    </div>
+    <ng-template #uploadButton>
+      <mat-card-actions>
+        <button class="upload-button" mat-button (click)="onUpload()">Upload</button>
+      </mat-card-actions>
+    </ng-template>
+
+  </mat-card>
+</div>

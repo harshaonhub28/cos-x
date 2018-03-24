@@ -1,0 +1,39 @@
+<div class="assign-container" fxLayout="row" fxLayoutAlign="center center">
+  <mat-card class="assign-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h3 id="card-title">Assign Teacher</h3>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field>
+        <mat-select class="selectBox" placeholder="Teacher" [(ngModel)]="selectedTeacher" name="teacher">
+          <mat-option *ngFor="let teacher of teachers" [value]="teacher.teacherId">
+            {{teacher.teacherName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select class="selectBox" placeholder="Class" [(ngModel)]="selectedStandard" name="standard">
+          <mat-option *ngFor="let class of classes" [value]="class">
+            {{class}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select class="selectBox" placeholder="Duration" [(ngModel)]="selectedDuration" name="duration">
+          <mat-option *ngFor="let duration of durations" [value]="duration">
+            {{duration}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="showSpinner;else assignButton">
+        <mat-spinner id="spinner" [diameter]="30"></mat-spinner>
+      </div>
+      <ng-template #assignButton>
+        <button id="assignButton" mat-raised-button (click)="onAssign()">Assign teacher</button>
+      </ng-template>
+
+    </mat-card-content>
+  </mat-card>
+</div>

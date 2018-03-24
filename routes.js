@@ -25,5 +25,9 @@ router.post("/login", userController.login);
 router.post("/upload/students", studentController.uploadStudents);
 //api to upload teachers data
 router.post("/upload/teachers", teacherController.uploadTeachers);
+//api to get teachers data
+router.get("/get/teachers/:schoolId", teacherController.getTeachers);
+//api to assign teacher to a standard
+router.post("/assign-teacher", teacherController.assignTeacher);
 
 module.exports = router;

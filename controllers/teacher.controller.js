@@ -58,7 +58,7 @@ const uploadTeachers = (req, res) => {
         console.log(teachers);
         TeacherModel.create(teachers, (err, teacherArray) => {
           if (err) throw err;
-          res.status(201).send("Teachers created");
+          res.status(201).json({ message: "Teachers created" });
         });
       } catch (err) {
         if (err) throw err;
@@ -67,4 +67,47 @@ const uploadTeachers = (req, res) => {
   }
 };
 
-module.exports = { uploadTeachers };
+const getTeachers = (req, res) => {
+  const schoolId = req.params.schoolId;
+  TeacherModel.find({ schoolId }, (err, teacherArray) => {
+    if (err) throw err;
+
+    if (teacherArray.length) {
+      const teachersEdited = teacherArray.map(teacher => {
+        return {
+          teacherId: teacher._id,
+          teacherName: teacher.teacherName,
+          department: teacher.department,
+          address: teacher.address,
+          email: teacher.email
+        };
+      });
+
+      res.send(teachersEdited);
+    } else {
+      res.send("No teacher found");
+    }
+  });
+};
+
+const assignTeacher = (req, res) => {
+  if (req.body.teacherId && req.body.standard && req.body.duration) {
+    const teacherId = req.body.teacherId;
+
+    const assignedStandard = {
+      standard: req.body.standard,
+      duration: req.body.duration
+    };
+    TeacherModel.findById(teacherId, (err, teacher) => {
+      if (err) throw err;
+      teacher.set({ assignedStandard });
+      teacher.save((err, assignedTeacher) => {
+        if (err) throw err;
+        console.log(assignedTeacher);
+        res.json({ message: "Teacher assigned to the class" });
+      });
+    });
+  }
+};
+
+module.exports = { uploadTeachers, getTeachers, assignTeacher };

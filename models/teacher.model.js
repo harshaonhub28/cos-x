@@ -27,12 +27,13 @@ const teacherSchema = new Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
-  //The class which the teacher is assigned to, and the duration of the assignment
-  assignedClass: {
+  //The standard which the teacher is assigned to, and the duration of the assignment
+  assignedStandard: {
     type: {
-      class: String,
+      standard: String,
       duration: {
         type: String,
         enum: {

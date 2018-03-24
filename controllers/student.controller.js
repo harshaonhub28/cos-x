@@ -61,7 +61,7 @@ const uploadStudents = (req, res) => {
         console.log(students);
         StudentModel.create(students, (err, studentArray) => {
           if (err) throw err;
-          res.status(201).send("Students created");
+          res.status(201).json({ message: "Students created" });
         });
       } catch (err) {
         if (err) throw err;

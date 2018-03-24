@@ -12,6 +12,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 // services
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth-guard.service";
+import { StudentService } from "./services/student.service";
+import { TeacherService } from "./services/teacher.service";
 
 // angular material compnents
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -43,6 +45,9 @@ import { SignupComponent } from "./components/signup/signup.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { ReportUploadComponent } from "./components/report-upload/report-upload.component";
 import { ViewReportComponent } from "./components/view-report/view-report.component";
+import { StudentUploadComponent } from "./components/student-upload/student-upload.component";
+import { TeacherUploadComponent } from "./components/teacher-upload/teacher-upload.component";
+import { AssignTeacherComponent } from "./components/assign-teacher/assign-teacher.component";
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full" },
@@ -64,6 +69,24 @@ const appRoutes: Routes = [
     component: ViewReportComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
+  },
+  {
+    path: "upload-students",
+    component: StudentUploadComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "upload-teachers",
+    component: TeacherUploadComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "assign-teacher",
+    component: AssignTeacherComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -75,7 +98,10 @@ const appRoutes: Routes = [
     SignupComponent,
     DashboardComponent,
     ReportUploadComponent,
-    ViewReportComponent
+    ViewReportComponent,
+    StudentUploadComponent,
+    TeacherUploadComponent,
+    AssignTeacherComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +131,7 @@ const appRoutes: Routes = [
     MatDividerModule,
     MatTableModule
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, StudentService, TeacherService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

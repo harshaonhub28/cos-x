@@ -8,15 +8,11 @@ const standardSchema = new Schema({
     required: true,
     unique: true
   },
-  standard: {
+  standards: {
     type: [
       {
-        standard: String,
-        subjects: [
-          {
-            subject: String
-          }
-        ]
+        level: String,
+        subjects: [String]
       }
     ]
   }
@@ -24,6 +20,6 @@ const standardSchema = new Schema({
 
 standardSchema.set("timestamps", true);
 
-const StandardModel = mongoose.model("class", StandardSchema);
+const StandardModel = mongoose.model("standard", standardSchema);
 
 module.exports = { StandardModel };

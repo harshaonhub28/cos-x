@@ -14,6 +14,7 @@ import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./services/auth-guard.service";
 import { StudentService } from "./services/student.service";
 import { TeacherService } from "./services/teacher.service";
+import { StandardService } from "./services/standard.service";
 
 // angular material compnents
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -48,6 +49,7 @@ import { ViewReportComponent } from "./components/view-report/view-report.compon
 import { StudentUploadComponent } from "./components/student-upload/student-upload.component";
 import { TeacherUploadComponent } from "./components/teacher-upload/teacher-upload.component";
 import { AssignTeacherComponent } from "./components/assign-teacher/assign-teacher.component";
+import { StandardUploadComponent } from "./components/standard-upload/standard-upload.component";
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full" },
@@ -87,6 +89,12 @@ const appRoutes: Routes = [
     component: AssignTeacherComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
+  },
+  {
+    path: "upload-standards",
+    component: StandardUploadComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -101,7 +109,8 @@ const appRoutes: Routes = [
     ViewReportComponent,
     StudentUploadComponent,
     TeacherUploadComponent,
-    AssignTeacherComponent
+    AssignTeacherComponent,
+    StandardUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -131,7 +140,13 @@ const appRoutes: Routes = [
     MatDividerModule,
     MatTableModule
   ],
-  providers: [AuthService, AuthGuard, StudentService, TeacherService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    StudentService,
+    TeacherService,
+    StandardService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

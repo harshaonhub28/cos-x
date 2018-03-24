@@ -3,6 +3,7 @@ const fileController = require("./controllers/file.controller");
 const userController = require("./controllers/user.controller");
 const studentController = require("./controllers/student.controller");
 const teacherController = require("./controllers/teacher.controller");
+const standardController = require("./controllers/standard.controller");
 const logger = require("./config/logger");
 
 /* everything will go at /api/route */
@@ -29,5 +30,7 @@ router.post("/upload/teachers", teacherController.uploadTeachers);
 router.get("/get/teachers/:schoolId", teacherController.getTeachers);
 //api to assign teacher to a standard
 router.post("/assign-teacher", teacherController.assignTeacher);
+//api to upload standards for a school
+router.post("/upload/standards", standardController.uploadStandards);
 
 module.exports = router;

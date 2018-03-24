@@ -1,18 +1,18 @@
 import { Component, OnInit } from "@angular/core";
-import { TeacherService } from "../../services/teacher.service";
+import { StandardService } from "../../services/standard.service";
 import { MatSnackBar } from "@angular/material";
 
 @Component({
-  selector: "teacher-upload",
-  templateUrl: "./teacher-upload.component.html",
-  styleUrls: ["./teacher-upload.component.css"]
+  selector: "app-standard-upload",
+  templateUrl: "./standard-upload.component.html",
+  styleUrls: ["./standard-upload.component.css"]
 })
-export class TeacherUploadComponent implements OnInit {
+export class StandardUploadComponent implements OnInit {
   fileName;
   data;
   showSpinner;
 
-  constructor(private service: TeacherService, public snackBar: MatSnackBar) {}
+  constructor(private service: StandardService, public snackBar: MatSnackBar) {}
 
   ngOnInit() {
     //To style input button,its hidden and another proxy element is linked to it
@@ -62,10 +62,11 @@ export class TeacherUploadComponent implements OnInit {
       filename: this.fileName,
       data: this.data
     };
-    this.service.uploadTeachers(body).subscribe(
+
+    this.service.uploadStandards(body).subscribe(
       response => {
         if (response.status === 201) {
-          this.snackBar.open("Questions uploaded!", "OK", {
+          this.snackBar.open("Standards uploaded!", "OK", {
             duration: 2000
           });
         } else {
@@ -79,7 +80,6 @@ export class TeacherUploadComponent implements OnInit {
         document.getElementById("custom-file-input").innerText = "Choose file";
       },
       (error: Response) => {
-        // console.log(error);
         switch (error.status) {
           default:
             this.snackBar.open("Something went wrong", "OK", {

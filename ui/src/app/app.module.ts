@@ -15,6 +15,7 @@ import { AuthGuard } from "./services/auth-guard.service";
 import { StudentService } from "./services/student.service";
 import { TeacherService } from "./services/teacher.service";
 import { StandardService } from "./services/standard.service";
+import { ReportService } from "./services/report.service";
 
 // angular material compnents
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -145,7 +146,8 @@ const appRoutes: Routes = [
     AuthGuard,
     StudentService,
     TeacherService,
-    StandardService
+    StandardService,
+    ReportService
   ],
   bootstrap: [AppComponent]
 })

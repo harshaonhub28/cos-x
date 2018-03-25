@@ -1,8 +1,8 @@
 Standard,Subject,Subject,Subject,Subject,Subject,Subject,Subject,Subject
-barca,1,2,3,4,5,6,7,
-madrid,2,3,4,5,6,7,8,2
-psg,3,4,5,6,7,8,5,
-city,4,5,6,7,8,9,10,2
-arsenal,5,6,7,8,9,5,,
-liverpool,6,7,8,9,,,,
-bayern,7,8,9,10,11,12,13,
+Barcelona,Maths,Science,Social,English,Spanish,Catalonian,Italian,
+madrid,Maths,Science,Social,English,Spanish,,,
+psg,Maths,Science,Social,English,Spanish,French,Italian,
+city,Maths,Science,Social,English,Spanish,Catalonian,Italian,
+arsenal,Maths,Science,Social,English,Spanish,Catalonian,Italian,
+liverpool,Maths,Science,Social,English,Spanish,German,,
+bayern,Maths,Science,Social,English,Spanish,Catalonian,German,

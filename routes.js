@@ -32,5 +32,7 @@ router.get("/get/teachers/:schoolId", teacherController.getTeachers);
 router.post("/assign-teacher", teacherController.assignTeacher);
 //api to upload standards for a school
 router.post("/upload/standards", standardController.uploadStandards);
+//api to get subjects for a standard
+router.get("/get/subjects/:schoolId/:level", standardController.getSubjects);
 
 module.exports = router;

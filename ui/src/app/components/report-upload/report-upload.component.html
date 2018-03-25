@@ -2,10 +2,10 @@
   <mat-card class="report-card">
     <mat-card-header class="report-header">
       <mat-card-title>
-        <h2>Student name</h2>
+        <h2>{{student.studentName}}</h2>
       </mat-card-title>
       <mat-card-subtitle>
-        Class
+        {{student.level}}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -17,27 +17,33 @@
 
         <h4>Exam</h4>
         <mat-form-field class="scoreInput">
-          <mat-select placeholder="Select">
-            <mat-option value="option" *ngFor="let examType of validExamTypes">{{examType}}</mat-option>
+          <mat-select [(value)]="selectedExam" placeholder="Select">
+            <mat-option [value]="examType" *ngFor="let examType of validExamTypes">{{examType}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
 
-      <div class="form-input" *ngFor="let subject of subjects">
+      <div class="form-input" *ngFor="let subject of subjects; let i=index">
         <div fxLayout="row" fxLayoutAlign="space-around center">
           <h4>{{subject}}</h4>
           <div class="scoreInput">
             <mat-form-field>
-              <input matInput placeholder="Score">
+              <input matInput [id]="subject" [(ngModel)]="this.scores[i].score" placeholder="Score">
             </mat-form-field>
           </div>
 
         </div>
       </div>
     </mat-card-content>
-    <mat-divider></mat-divider>
-    <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center">
-      <button class="upload-button" mat-raised-button>Upload</button>
-    </mat-card-actions>
+
+    <div *ngIf="showSpinner;else uploadButton">
+      <mat-spinner id="spinner" [diameter]="30"></mat-spinner>
+    </div>
+    <ng-template #uploadButton>
+      <mat-card-actions fxLayout="row " fxLayoutAlign="space-around center ">
+        <button class="upload-button " mat-raised-button (click)="onUpload() ">Upload</button>
+      </mat-card-actions>
+    </ng-template>
+
   </mat-card>
 </div>

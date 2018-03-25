@@ -73,4 +73,24 @@ const uploadStandards = (req, res) => {
   }
 };
 
-module.exports = { uploadStandards };
+const getSubjects = (req, res) => {
+  if (req.params.schoolId && req.params.level) {
+    const schoolId = req.params.schoolId;
+    const level = req.params.level;
+
+    StandardModel.find({ schoolId }, (err, school) => {
+      //school is the object with all the classes and corresponding subjects in that school
+      if (err) throw err;
+
+      const standards = school[0].standards;
+      for (let standard of standards) {
+        if (standard.level === level) {
+          res.send(standard);
+        }
+      }
+      res.send(school);
+    });
+  }
+};
+
+module.exports = { uploadStandards, getSubjects };

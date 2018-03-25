@@ -70,4 +70,25 @@ const uploadStudents = (req, res) => {
   }
 };
 
-module.exports = { uploadStudents };
+const getStudents = (req, res) => {
+  if (req.params.standard) {
+    const standard = req.params.standard;
+
+    StudentModel.find({ standard }, (err, studentArray) => {
+      let studentsEdited = studentArray.map(student => {
+        return {
+          schoolId: student.schoolId,
+          studentId: student._id,
+          name: student.studentName,
+          standard: student.standard,
+          address: student.address,
+          email: student.email,
+          guardianContact: student.guardianContact
+        };
+      });
+      res.json(studentsEdited);
+    });
+  }
+};
+
+module.exports = { uploadStudents, getStudents };

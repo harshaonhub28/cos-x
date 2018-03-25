@@ -85,7 +85,7 @@ const getTeachers = (req, res) => {
 
       res.send(teachersEdited);
     } else {
-      res.json({ message: "No teachers found" });
+      res.status(204).json({ message: "No teachers found" });
     }
   });
 };

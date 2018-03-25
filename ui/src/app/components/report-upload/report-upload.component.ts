@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { StandardService } from "../../services/standard.service";
 import { ReportService } from "../../services/report.service";
 import { MatSnackBar } from "@angular/material";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "report-upload",
@@ -15,6 +16,13 @@ export class ReportUploadComponent implements OnInit {
     level: "Barcelona"
   };
   subjects = [];
+  examTypes = [
+    "Internals",
+    "Semester exams",
+    "Term exams",
+    "Practicals",
+    "Projects"
+  ];
   validExamTypes = [];
   selectedExam;
   scores = [];
@@ -30,7 +38,8 @@ export class ReportUploadComponent implements OnInit {
   constructor(
     private subjectService: StandardService,
     private reportService: ReportService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -70,31 +79,31 @@ export class ReportUploadComponent implements OnInit {
     this.reportService.getReport(this.student.id).subscribe(
       response => {
         if (response.body) {
-          const oldReport = response.body;
-          for (let exam in oldReport) {
+          const oldReport = response.body["marks"];
+          for (let exam of this.examTypes) {
             switch (exam) {
-              case "internals":
-                if (!oldReport[exam].length) {
+              case "Internals":
+                if (!oldReport[exam]) {
                   this.validExamTypes.push("Internals");
                 }
                 break;
-              case "semExams":
-                if (!oldReport[exam].length) {
+              case "Semester exams":
+                if (!oldReport[exam]) {
                   this.validExamTypes.push("Semester exams");
                 }
                 break;
-              case "termExams":
-                if (!oldReport[exam].length) {
+              case "Term exams":
+                if (!oldReport[exam]) {
                   this.validExamTypes.push("Term exams");
                 }
                 break;
-              case "practicals":
-                if (!oldReport[exam].length) {
+              case "Practicals":
+                if (!oldReport[exam]) {
                   this.validExamTypes.push("Practicals");
                 }
                 break;
-              case "projects":
-                if (!oldReport[exam].length) {
+              case "Projects":
+                if (!oldReport[exam]) {
                   this.validExamTypes.push("Projects");
                 }
             }
@@ -109,18 +118,29 @@ export class ReportUploadComponent implements OnInit {
             "Projects"
           ];
         }
+        if (!this.validExamTypes.length) {
+          this.snackBar.open(
+            "Report for all the exams already uploaded",
+            "OK",
+            {
+              duration: 3000
+            }
+          );
+          this.router.navigate(["/view-report"]);
+        }
       },
       (error: Response) => {
         console.log(error);
         switch (error.status) {
           case 404:
-            this.snackBar.open("Request source not found", "OK", {
-              duration: 2000
+            this.snackBar.open("Report not found", "OK", {
+              duration: 3000
             });
+            //should be re-routed to students page
             break;
           default:
             this.snackBar.open("Something went wrong", "OK", {
-              duration: 2000
+              duration: 3000
             });
         }
       }

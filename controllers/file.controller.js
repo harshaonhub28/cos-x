@@ -155,8 +155,53 @@ const getReport = (req, res) => {
   };
   ReportModel.find(query, (err, reportArray) => {
     if (err) throw err;
-    //console.log(report);
-    res.json(reportArray[0]);
+    //console.log(reportArray.length);
+    if (reportArray.length) {
+      const report = reportArray[0];
+      const reportEdited = {
+        schoolId: report.schoolId,
+        studentId: report.studentId,
+        teacherId: report.teacherId,
+        standard: report.standard,
+        marks: {}
+      };
+      for (let key in report) {
+        switch (key) {
+          case "internals": {
+            if (report[key].length) {
+              reportEdited.marks["Internals"] = report[key];
+            }
+            break;
+          }
+          case "termExams": {
+            if (report[key].length) {
+              reportEdited.marks["Term exams"] = report[key];
+            }
+            break;
+          }
+          case "semExams": {
+            if (report[key].length) {
+              reportEdited.marks["Semester exams"] = report[key];
+            }
+            break;
+          }
+          case "practicals": {
+            if (report[key].length) {
+              reportEdited.marks["Practicals"] = report[key];
+            }
+            break;
+          }
+          case "projects": {
+            if (report[key].length) {
+              reportEdited.marks["Projects"] = report[key];
+            }
+          }
+        }
+      }
+      res.json(reportEdited);
+    } else {
+      res.status(204).json({ message: "No active report found" });
+    }
   });
 };
 

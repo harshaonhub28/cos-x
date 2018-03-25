@@ -12,8 +12,8 @@ export class TeacherService {
     });
   }
 
-  getTeachers() {
-    return this.http.get(this.url + "get/teachers/test-user", {
+  getTeachers(schoolId) {
+    return this.http.get(this.url + `get/teachers/${schoolId}`, {
       observe: "response"
     });
   }

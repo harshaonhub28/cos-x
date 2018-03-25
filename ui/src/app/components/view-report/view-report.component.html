@@ -2,10 +2,10 @@
   <mat-card class="report-card">
     <mat-card-header class="report-header">
       <mat-card-title>
-        <h2>Student name</h2>
+        <h2>{{student.studentName}}</h2>
       </mat-card-title>
       <mat-card-subtitle>
-        Class
+        {{student.level}}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
@@ -20,8 +20,8 @@
 
           <div *ngFor="let column of displayedColumns">
             <ng-container [matColumnDef]="column">
-              <mat-header-cell *matHeaderCellDef> {{column | uppercase}} </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{element[column]}} </mat-cell>
+              <mat-header-cell *matHeaderCellDef> {{column}} </mat-header-cell>
+              <mat-cell class="table-cell" *matCellDef="let element"> {{element[column]}} </mat-cell>
             </ng-container>
           </div>
 
@@ -33,8 +33,8 @@
     <mat-divider></mat-divider>
 
     <mat-card-actions class="card-actions" fxLayout="row" fxLayoutAlign="space-around center">
-      <button class="upload-button" mat-raised-button>Update</button>
-      <button class="upload-button" mat-raised-button>Discard & Create New report</button>
+      <button class="upload-button" mat-raised-button routerLink="/upload-report">Update</button>
+      <button class="upload-button" mat-raised-button (click)="onDiscard()">Discard & Create New report</button>
     </mat-card-actions>
 
   </mat-card>

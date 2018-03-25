@@ -13,17 +13,24 @@ export class AssignTeacherComponent implements OnInit {
   selectedStandard;
   selectedDuration;
   showSpinner;
+  schoolId = "test-user";
 
   classes = ["barca", "madrid", "city"];
   durations = ["Semester", "Year"];
   constructor(private service: TeacherService, public snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.service.getTeachers().subscribe(
+    this.service.getTeachers(this.schoolId).subscribe(
       response => {
-        if (Object.keys(response.body).length) {
+        if (response.body) {
           for (let key in response.body) {
             this.teachers.push(response.body[key]);
+          }
+        } else {
+          if (response.status === 204) {
+            this.snackBar.open("Teachers not uploaded yet", "OK", {
+              duration: 2000
+            });
           }
         }
       },

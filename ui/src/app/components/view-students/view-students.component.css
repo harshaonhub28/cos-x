@@ -1,0 +1,21 @@
+.standardInput {
+  margin-top: 5%;
+}
+
+.studentCard {
+  max-width: 100%;
+  margin: 30px;
+  width: 80%;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 1000px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 50%;
+}

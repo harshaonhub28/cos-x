@@ -18,4 +18,10 @@ export class ReportService {
       observe: "response"
     });
   }
+
+  discardReport(studentId) {
+    return this.http.delete(this.url + `delete/report/${studentId}`, {
+      observe: "response"
+    });
+  }
 }

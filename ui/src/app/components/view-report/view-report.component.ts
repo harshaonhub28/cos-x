@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MatSnackBar } from "@angular/material";
 import { ReportService } from "../../services/report.service";
 import { Router } from "@angular/router";
@@ -9,11 +9,9 @@ import { Router } from "@angular/router";
   styleUrls: ["./view-report.component.css"]
 })
 export class ViewReportComponent implements OnInit {
-  student = {
-    id: "5ab53b95d3b2dd2724652a75",
-    studentName: "Leo Messi",
-    level: "Barcelona"
-  };
+  @Input() student;
+  @Output() update = new EventEmitter();
+  @Output() discard = new EventEmitter();
   displayedColumns = ["Exam"];
   reportData = [];
 
@@ -70,30 +68,11 @@ export class ViewReportComponent implements OnInit {
     );
   }
 
+  onUpdate() {
+    this.update.emit();
+  }
+
   onDiscard() {
-    this.reportService.discardReport(this.student.id).subscribe(
-      response => {
-        if (response.status === 202) {
-          this.snackBar.open("Report discarded", "OK", {
-            duration: 3000
-          });
-          this.router.navigate(["/upload-report"]);
-        }
-      },
-      (error: Response) => {
-        console.log(error);
-        switch (error.status) {
-          case 404:
-            this.snackBar.open("Request source not found", "OK", {
-              duration: 3000
-            });
-            break;
-          default:
-            this.snackBar.open("Something went wrong", "OK", {
-              duration: 3000
-            });
-        }
-      }
-    );
+    this.discard.emit();
   }
 }

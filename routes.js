@@ -36,5 +36,7 @@ router.post("/upload/standards", standardController.uploadStandards);
 router.get("/get/subjects/:schoolId/:level", standardController.getSubjects);
 //api to get students in a standard
 router.get("/get/students/:standard", studentController.getStudents);
+//api to get a particular student
+router.get("/get/student/:email", studentController.getStudent);
 
 module.exports = router;

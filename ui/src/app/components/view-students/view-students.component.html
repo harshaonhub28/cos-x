@@ -20,7 +20,7 @@
         <div *ngFor="let column of displayedColumns">
           <ng-container [matColumnDef]="column">
             <mat-header-cell *matHeaderCellDef> {{column | uppercase}} </mat-header-cell>
-            <mat-cell class="table-cell" *matCellDef="let element"> {{element[column]}} </mat-cell>
+            <mat-cell class="table-cell" *matCellDef="let element" (click)="onTableClick(element)"> {{element[column]}} </mat-cell>
           </ng-container>
         </div>
 

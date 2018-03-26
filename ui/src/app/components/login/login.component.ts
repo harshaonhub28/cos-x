@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
               "returnUrl"
             );
             //console.log(returnUrl);
-            this.router.navigate([returnUrl || "/"]);
+            this.router.navigate([returnUrl || "/dashboard"]);
           } else this.invalidLogin = "Invalid credentials";
           this.showSpinner = false;
         },

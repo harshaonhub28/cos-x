@@ -52,6 +52,8 @@ import { TeacherUploadComponent } from "./components/teacher-upload/teacher-uplo
 import { AssignTeacherComponent } from "./components/assign-teacher/assign-teacher.component";
 import { StandardUploadComponent } from "./components/standard-upload/standard-upload.component";
 import { ViewStudentsComponent } from "./components/view-students/view-students.component";
+import { StudentProfileComponent } from "./components/student-profile/student-profile.component";
+import { ViewTeachersComponent } from "./components/view-teachers/view-teachers.component";
 
 const appRoutes: Routes = [
   { path: "login", component: LoginComponent, pathMatch: "full" },
@@ -103,6 +105,18 @@ const appRoutes: Routes = [
     component: ViewStudentsComponent,
     pathMatch: "full",
     canActivate: [AuthGuard]
+  },
+  {
+    path: "view-teachers",
+    component: ViewTeachersComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "student-profile/:email",
+    component: StudentProfileComponent,
+    pathMatch: "full",
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -119,7 +133,9 @@ const appRoutes: Routes = [
     TeacherUploadComponent,
     AssignTeacherComponent,
     StandardUploadComponent,
-    ViewStudentsComponent
+    ViewStudentsComponent,
+    StudentProfileComponent,
+    ViewTeachersComponent
   ],
   imports: [
     BrowserModule,

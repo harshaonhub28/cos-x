@@ -1,14 +1,6 @@
 <div class="reportContainer" fxLayout="column" fxLayoutAlign="center center">
   <mat-card class="report-card">
-    <mat-card-header class="report-header">
-      <mat-card-title>
-        <h2>{{student.studentName}}</h2>
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{student.level}}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-divider></mat-divider>
+
 
     <mat-card-content class="report-form">
       <h3>Report:</h3>
@@ -40,8 +32,9 @@
       <mat-spinner id="spinner" [diameter]="30"></mat-spinner>
     </div>
     <ng-template #uploadButton>
-      <mat-card-actions fxLayout="row " fxLayoutAlign="space-around center ">
-        <button class="upload-button " mat-raised-button (click)="onUpload() ">Upload</button>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-around center ">
+        <button class="upload-button" mat-raised-button (click)="onUpload()">Upload</button>
+
       </mat-card-actions>
     </ng-template>
 

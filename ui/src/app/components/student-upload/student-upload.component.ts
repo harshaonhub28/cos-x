@@ -65,7 +65,7 @@ export class StudentUploadComponent implements OnInit {
     this.service.uploadStudents(body).subscribe(
       response => {
         if (response.status === 201) {
-          this.snackBar.open("Questions uploaded!", "OK", {
+          this.snackBar.open("Students uploaded!", "OK", {
             duration: 2000
           });
         } else {

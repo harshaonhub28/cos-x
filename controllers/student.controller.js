@@ -91,4 +91,28 @@ const getStudents = (req, res) => {
   }
 };
 
-module.exports = { uploadStudents, getStudents };
+const getStudent = (req, res) => {
+  if (req.params.email) {
+    const email = req.params.email;
+
+    StudentModel.find({ email }, (err, studentArray) => {
+      if (err) throw err;
+      console.log(studentArray);
+      if (studentArray.length) {
+        let student = {
+          id: studentArray[0]._id,
+          studentName: studentArray[0].studentName,
+          level: studentArray[0].standard,
+          address: studentArray[0].address,
+          email: studentArray[0].email,
+          guardianContact: studentArray[0].guardianContact
+        };
+        res.json(student);
+      } else {
+        res.status(404).json({ message: "Student not found" });
+      }
+    });
+  }
+};
+
+module.exports = { uploadStudents, getStudents, getStudent };

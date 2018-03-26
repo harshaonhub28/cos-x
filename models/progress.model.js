@@ -16,8 +16,7 @@ const reportSchema = new Schema({
     default: ""
   },
   studentId: {
-    type: String,
-    unique: true
+    type: String
   },
   internals: {
     type: [

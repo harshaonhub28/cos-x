@@ -3,7 +3,7 @@ import { StandardService } from "../../services/standard.service";
 import { MatSnackBar } from "@angular/material";
 
 @Component({
-  selector: "app-standard-upload",
+  selector: "standard-upload",
   templateUrl: "./standard-upload.component.html",
   styleUrls: ["./standard-upload.component.css"]
 })

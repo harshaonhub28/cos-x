@@ -16,4 +16,11 @@ export class StudentService {
       observe: "response"
     });
   }
+
+  //Retrieving a student
+  getStudent(email) {
+    return this.http.get(this.url + `get/student/${email}`, {
+      observe: "response"
+    });
+  }
 }

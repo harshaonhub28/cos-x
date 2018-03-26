@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 import { StandardService } from "../../services/standard.service";
 import { ReportService } from "../../services/report.service";
 import { MatSnackBar } from "@angular/material";
@@ -10,11 +10,8 @@ import { Router } from "@angular/router";
   styleUrls: ["./report-upload.component.css"]
 })
 export class ReportUploadComponent implements OnInit {
-  student = {
-    id: "5ab53b95d3b2dd2724652a75",
-    studentName: "Leo Messi",
-    level: "Barcelona"
-  };
+  @Input() student;
+
   subjects = [];
   examTypes = [
     "Internals",
@@ -29,8 +26,8 @@ export class ReportUploadComponent implements OnInit {
   report = {
     schoolId: "test-user",
     teacherId: "test-teacher",
-    studentId: this.student.id,
-    standard: this.student.level,
+    //studentId: this.student.id,
+    //standard: this.student.level,
     marks: {}
   };
   showSpinner;
@@ -158,6 +155,8 @@ export class ReportUploadComponent implements OnInit {
   }*/
 
   onUpload() {
+    this.report["studentId"] = this.student.id;
+    this.report["standard"] = this.student.level;
     let uploadReady = true;
     if (!this.selectedExam) {
       this.snackBar.open("Please select an exam", "OK", {

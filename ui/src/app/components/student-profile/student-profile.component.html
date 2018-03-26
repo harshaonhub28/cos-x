@@ -1,0 +1,37 @@
+<div class="container" fxLayout="column" fxLayoutAlign="space-around center">
+  <mat-card class="student-card" fxLayout="column" fxLayoutAlign="space-around center">
+    <mat-card-header>
+      <mat-card-title fxLayout="row">
+        <h3>{{student.studentName}}</h3>
+
+      </mat-card-title>
+      <mat-card-subtitle>
+        <h4>{{student.level}}</h4>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{student.address}}</p>
+      <p>{{student.email}}</p>
+      <p>{{student.guardianContact}}</p>
+    </mat-card-content>
+
+    <div *ngIf="!this.noOptions">
+      <div *ngIf="this.reportExists; else createReport">
+        <mat-card-actions class="card-actions" fxLayout="row" fxLayoutAlign="space-around center">
+          <button class="upload-button" mat-raised-button (click)="viewReport=true;noOptions=true">View report</button>
+          <button class="upload-button" mat-raised-button (click)="uploadReport=true;noOptions=true">Update report</button>
+        </mat-card-actions>
+      </div>
+      <ng-template #createReport>
+        <button class="upload-button" mat-raised-button (click)="uploadReport=true;noOptions=true">Create Report</button>
+      </ng-template>
+    </div>
+  </mat-card>
+  <div *ngIf="viewReport">
+    <view-report [student]="student" (update)="onUpdate()" (discard)="onDiscard()"></view-report>
+  </div>
+  <div *ngIf="uploadReport">
+    <report-upload [student]="student"></report-upload>
+  </div>
+
+</div>

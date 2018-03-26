@@ -1,17 +1,10 @@
 <div class="reportContainer" fxLayout="column" fxLayoutAlign="center center">
   <mat-card class="report-card">
-    <mat-card-header class="report-header">
-      <mat-card-title>
-        <h2>{{student.studentName}}</h2>
-      </mat-card-title>
-      <mat-card-subtitle>
-        {{student.level}}
-      </mat-card-subtitle>
-    </mat-card-header>
-    <mat-divider></mat-divider>
+
+
 
     <mat-card-content class="report-form">
-      <h3>Report:</h3>
+      <h3>Report</h3>
       <div class="example-container mat-elevation-z8">
         <mat-table #table [dataSource]="reportData">
 
@@ -33,7 +26,7 @@
     <mat-divider></mat-divider>
 
     <mat-card-actions class="card-actions" fxLayout="row" fxLayoutAlign="space-around center">
-      <button class="upload-button" mat-raised-button routerLink="/upload-report">Update</button>
+      <button class="upload-button" mat-raised-button (click)="onUpdate()">Update</button>
       <button class="upload-button" mat-raised-button (click)="onDiscard()">Discard & Create New report</button>
     </mat-card-actions>
 
